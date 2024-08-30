@@ -1,14 +1,14 @@
+use std::net::TcpListener;
+
 use actix_web::{
-    dev::{ServiceFactory, ServiceRequest, ServiceResponse},
+    dev::{Server, ServiceFactory, ServiceRequest, ServiceResponse},
     web, App, HttpRequest, HttpResponse, HttpServer, Responder,
 };
 use serde_json::json;
 
-pub async fn run() -> Result<(), std::io::Error> {
-    HttpServer::new(|| create_app())
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+pub fn run(listener: TcpListener) -> Result<Server, std::io::Error> {
+    let server = HttpServer::new(|| create_app()).listen(listener)?.run();
+    Ok(server)
 }
 
 pub fn create_app() -> App<
