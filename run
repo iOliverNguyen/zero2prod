@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# -------- this is the magic ------- #
+source "$PROJECT_ROOT/scripts/_cli.sh"
