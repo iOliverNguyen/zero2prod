@@ -1,4 +1,9 @@
 #!/bin/bash
+set -eo pipefail
+
+run-start-docker() {
+    docker compose up -d
+}
 
 # -------- this is the magic ------- #
 source "$PROJECT_ROOT/scripts/_cli.sh"

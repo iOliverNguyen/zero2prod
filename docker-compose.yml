@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres
+    container_name: newsletter-db
+    environment:
+      POSTGRES_USER: "${DB_USER:?}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD:?}"
+      POSTGRES_DB: "${DB_NAME:?}"
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - newsletter-db-data:/var/lib/postgresql/data
+    command: ["postgres", "-N", "1000"]
+    # ^ Increased maximum number of connections for testing purposes
+
+volumes:
+  newsletter-db-data:
